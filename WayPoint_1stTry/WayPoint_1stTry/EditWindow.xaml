@@ -1,0 +1,29 @@
+﻿<Window x:Class="WayPoint_1stTry.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WayPoint_1stTry"
+        xmlns:vm="clr-namespace:WayPoint_1stTry.ViewModels"
+        mc:Ignorable="d"
+        Title="EditWindow" Height="350" Width="400">
+    <Window.DataContext>
+        <vm:EditViewModel></vm:EditViewModel>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel x:Name="stackpanel">
+            <Label Content="pont code:"></Label>
+            <TextBox x:Name="pointbox" Text="{Binding MyWaypoint.PointCode}"></TextBox>
+            <Label Content="X:"></Label>
+            <TextBox Text="{Binding MyWaypoint.X}"></TextBox>
+            <Label Content="Y:"></Label>
+            <TextBox Text="{Binding MyWaypoint.Y}"></TextBox>
+            <Label Content="Height:"></Label>
+            <TextBox Text="{Binding MyWaypoint.Height}"></TextBox>
+            <Label Content="Category:"></Label>
+            <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding MyWaypoint.Category}"></ComboBox>
+
+            <Button Content="Edit" Click="Button_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

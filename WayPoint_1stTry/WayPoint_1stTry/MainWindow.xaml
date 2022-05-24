@@ -1,0 +1,68 @@
+﻿<Window x:Class="WayPoint_1stTry.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WayPoint_1stTry"
+        xmlns:vm="clr-namespace:WayPoint_1stTry.ViewModels"
+         xmlns:helper="clr-namespace:WayPoint_1stTry.Helper"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel></vm:MainViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <helper:Converter x:Key="converter"></helper:Converter>
+        <helper:DifficultyConverter x:Key="difConverter"></helper:DifficultyConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" ItemsSource="{Binding FirstList}" SelectedItem="{Binding SelectedPoint1}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding PointCode}"></Label>
+                        <Label Content="{Binding X}"></Label>
+                        <Label Content="{Binding Y}"></Label>
+                        <Label Content="{Binding Height}"></Label>
+                        <Label Content="{Binding Category}"></Label>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Button Content="Add" Command="{Binding Add}"></Button>
+            <Button Content="Edit" Command="{Binding Edit}"></Button>
+            <Button Content="Delete" Command="{Binding Delete}"></Button>
+            <Button Content="Save" Command="{Binding Save}"></Button>
+        </StackPanel>
+        <ListBox Grid.Column="2" ItemsSource="{Binding SecondsList}" SelectedItem="{Binding SelectedPoint2}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding PointCode}"></Label>
+                        <Label Content="{Binding X}"></Label>
+                        <Label Content="{Binding Y}"></Label>
+                        <Label Content="{Binding Height}"></Label>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Grid.Column="3" ItemsSource="{Binding Hikes}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding ListOfPoints ,Converter={StaticResource converter}}" ></Label>
+                        <Label Content="{Binding DateOfHike}"></Label>
+                        <Slider Value="{Binding Difficulty,Converter={StaticResource difConverter}}" Minimum="0" Maximum="15"></Slider>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
